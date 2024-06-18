@@ -1,5 +1,9 @@
-import openai
+from openai import OpenAI
+import os
 import re
+import pdfplumber
+from pdf2image import convert_from_path
+from PIL import Image
 
 # Set your OpenAI API key
 openai.api_key = "your_api_key"
