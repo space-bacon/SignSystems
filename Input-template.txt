@@ -2,7 +2,7 @@ The script is designed to work for keywords, phrases, pdf's, events, and more wi
 
 This is an example of how the script can be used for deconstruction of an event. Note that images, charts, and other data can be analyzed if you opt for multimodal input via pdf instead of plain text. 
 
-There are two ways to approach this. Input anything or input specific taylored to the script (as below).
+There are two ways to approach this. Input anything or input content that is custom fit to assist the script and GPT-4 output (as below).
 
 Experiment and have fun. As above so below. Explore the Tao of sign.
 
