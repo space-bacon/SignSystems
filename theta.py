@@ -1,12 +1,14 @@
 from openai import OpenAI
+
+client = OpenAI(api_key="your_api_key_here")
 import os
 import re
 import pdfplumber
 from pdf2image import convert_from_path
 from PIL import Image
+import pytesseract
 
 # Set your OpenAI API key
-openai.api_key = "your_api_key"
 
 # Define the sign systems and their subcategories
 sign_systems = {
@@ -178,16 +180,15 @@ def gpt_categorization_and_signifier_chain(keyword, images=None):
 
     if images:
         for i, image in enumerate(images):
-            messages.append({"role": "user", "content": f"Image {i+1}", "image": image})
+            with open(image, "rb") as img_file:
+                messages.append({"role": "user", "content": f"Image {i+1}", "image": img_file.read()})
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=messages,
-        max_tokens=3000,
-        temperature=0.7
-    )
+    response = client.chat.completions.create(model="gpt-4",
+    messages=messages,
+    max_tokens=3000,
+    temperature=0.7)
 
-    return response.choices[0].message["content"].strip()
+    return response.choices[0].message.content.strip()
 
 def parse_gpt_response(response):
     weights = {}
@@ -287,6 +288,11 @@ def extract_text_and_images_from_pdf(pdf_path):
 
     return keyword, images
 
+def extract_text_from_image(image_path):
+    # Use pytesseract to extract text from the image
+    text = pytesseract.image_to_string(Image.open(image_path))
+    return text
+
 def split_text_into_batches(text, max_tokens_per_batch):
     words = text.split()
     batches = []
@@ -304,15 +310,18 @@ def split_text_into_batches(text, max_tokens_per_batch):
     return batches
 
 def main():
-    # Check if input.pdf exists, otherwise fall back to input.txt
     input_file = "input.pdf" if os.path.exists("input.pdf") else "input.txt"
+    image_file = "/mnt/data/IMG_3495.png"
 
     if input_file.endswith(".pdf"):
         keyword, images = extract_text_and_images_from_pdf(input_file)
-    else:
+    elif input_file.endswith(".txt"):
         with open(input_file, "r") as file:
             keyword = file.read().strip()
         images = None
+    elif image_file.endswith(".png"):
+        keyword = extract_text_from_image(image_file)
+        images = [image_file]
 
     # Split the text into batches if necessary
     max_tokens_per_batch = 3000  # Adjust as needed
