@@ -1,4 +1,4 @@
-The script is designed to work for keywords, phrases, pdf's, events, or entire environments. It is not limited to the specific template below. 
+The script is designed to work for keywords, phrases, pdf's, events, and more with multimodal support. It is not limited to the specific template below. 
 
 This is an example of how the script can be used for deconstruction of an event. Note that images, charts, and other data can be analyzed if you opt for multimodal input via pdf instead of plain text. 
 
