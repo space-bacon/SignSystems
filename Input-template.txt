@@ -2,101 +2,11 @@ The script is designed to work for keywords, phrases, pdf's, events, and more wi
 
 This is an example of how the script can be used for deconstruction of an event. Note that images, charts, and other data can be analyzed if you opt for multimodal input via pdf instead of plain text. 
 
-Event Template
+There are two ways to approach this. Input anything or input specific taylored to the script (as below).
 
-1. Event Title:
-   [Provide a brief, descriptive title for the event]
+Experiment and have fun. As above so below. Explore the Tao of sign.
 
-2. Event Description:
-   [Provide a detailed, thorough description of the event, including its significance and key aspects]
-
-3. Date and Time:
-   [Specify the exact date and time of the event]
-
-4. Location:
-   [Provide the precise location of the event, including any significant geographical or environmental details]
-
-5. Participants:
-   [List all the participants involved in the event, including their roles and affiliations]
-
-6. Activities:
-   [Describe all the activities that will take place during the event in detail]
-
-7. Communication Methods:
-   - Verbal Communication: [Describe any spoken communication methods used]
-   - Nonverbal Communication: [Describe any gestures, facial expressions, body language, or proxemics involved]
-   - Digital Communication: [Describe any use of digital platforms or devices for communication]
-   - Visual Communication: [Describe any visual aids or elements used for communication]
-
-8. Symbols and Signs:
-   [List any specific symbols, signs, or icons used during the event, and describe their significance]
-
-9. Technologies Involved:
-   [List any technologies or technological systems used during the event, including their purposes]
-
-10. Cultural Context:
-    [Describe the cultural context of the event, including any relevant rituals, customs, traditions, and cultural symbols]
-
-11. Biological Context:
-    [Describe any biological, genetic, or ecological elements relevant to the event, including any interactions with the environment]
-
-12. Legal or Ethical Considerations:
-    [Describe any legal or ethical considerations relevant to the event, including any regulatory signs or legal frameworks involved]
-
-13. Purpose and Goals:
-    [Describe the purpose and goals of the event in detail, including any long-term objectives]
-
-14. Historical Context:
-    [Provide any historical context relevant to the event, including its origins and evolution over time]
-
-15. Visual Elements:
-    [Describe any visual elements used in the event, such as art, color schemes, or visual displays]
-
-16. Auditory Elements:
-    [Describe any auditory elements used in the event, such as music, speeches, or sound effects]
-
-17. Textual Elements:
-    [Provide any text or documents related to the event, such as brochures, agendas, or informational materials]
-
-18. Semiotic Theories:
-    - Structural Semiotics: [Explain any structural semiotic elements involved]
-    - Peircean Semiotics: [Explain any Peircean semiotic elements involved]
-    - Saussurean Semiotics: [Explain any Saussurean semiotic elements involved]
-    - Biosemiotics: [Explain any biosemiotic elements involved]
-    - Cognitive Semiotics: [Explain any cognitive semiotic elements involved]
-    - Cultural Semiotics: [Explain any cultural semiotic elements involved]
-
-19. Subfields of Semiotics:
-    - Semiotic Anthropology: [Describe any anthropological semiotic elements]
-    - Comics Semiotics: [Describe any elements related to the semiotics of comics]
-    - Computational Semiotics: [Describe any computational semiotic elements]
-    - Cultural and Literary Semiotics: [Describe any literary or cultural semiotic elements]
-    - Cybersemiotics: [Describe any cybersemiotic elements]
-    - Design Semiotics: [Describe any design-related semiotic elements]
-    - Ethnosemiotics: [Describe any ethnographic semiotic elements]
-    - Film Semiotics: [Describe any film-related semiotic elements]
-    - Finite Semiotics: [Describe any technological semiotic elements]
-    - Gregorian Chant Semiology: [Describe any semiotic elements related to Gregorian chant]
-    - Hylosemiotics: [Describe any hylosemiotic elements]
-    - Law and Semiotics: [Describe any legal semiotic elements]
-    - Marketing Semiotics: [Describe any marketing-related semiotic elements]
-    - Music Semiotics: [Describe any musical semiotic elements]
-    - Organizational Semiotics: [Describe any organizational semiotic elements]
-    - Pictorial Semiotics: [Describe any pictorial semiotic elements]
-    - Semiotics of Music Videos: [Describe any semiotic elements in music videos]
-    - Social Semiotics: [Describe any social semiotic elements]
-    - Structuralism and Post-Structuralism: [Describe any structuralist or post-structuralist elements]
-    - Theatre Semiotics: [Describe any semiotic elements in theatre]
-    - Urban Semiotics: [Describe any urban semiotic elements]
-    - Visual Semiotics: [Describe any visual semiotic elements]
-    - Semiotics of Photography: [Describe any photographic semiotic elements]
-    - Artificial Intelligence Semiotics: [Describe any AI-related semiotic elements]
-    - Semiotics of Mathematics: [Describe any mathematical semiotic elements]
-
-20. Additional Notes:
-    [Any other relevant information not covered in the sections above]
-
-Example:
+### Detailed Example
 
 Event Title: Earth Day Celebration
 
@@ -123,9 +33,21 @@ Communication Methods:
 
 Symbols and Signs: 
 - Recycling symbols on bins and posters.
+  - Signifier: Recycling symbol
+  - Signified: Environmental responsibility and waste management
+  - Context: Used on bins and posters to indicate where recycling should occur
 - Earth Day logo prominently displayed on banners and digital media.
+  - Signifier: Earth Day logo
+  - Signified: Environmental action and awareness
+  - Context: Displayed on promotional materials to symbolize the event
 - Green ribbons worn by participants to symbolize environmental commitment.
+  - Signifier: Green ribbons
+  - Signified: Personal commitment to environmental causes
+  - Context: Worn by participants as a symbol of support
 - Signs indicating different activity areas and eco-friendly practices.
+  - Signifier: Directional signs
+  - Signified: Guidance and instructions for eco-friendly behavior
+  - Context: Placed around the event area for navigation and instruction
 
 Technologies Involved: 
 - Projectors for displaying presentations and videos.
@@ -213,8 +135,151 @@ Subfields of Semiotics:
 - Artificial Intelligence Semiotics: Use of AI in event planning and promotion, and its semiotic implications.
 - Semiotics of Mathematics: Use of statistical data and graphs to illustrate environmental trends and issues.
 
-Additional Notes:
-- The event is free to attend and open to all ages.
-- Eco-friendly transportation options are encouraged, with bike racks and public transit information provided.
-- Attendees are encouraged to bring their own reusable water bottles and containers to minimize waste.
-- Partnerships with local businesses and organizations to provide eco-friendly products and services.
+Spatial Data:
+- Latitude and Longitude: 40.785091, -73.968285
+- Known Public Utilities: Water fountains, restrooms, electrical outlets
+- Roads: West Drive, East Drive, Center Drive
+- Trails: North Woods Trail, Great Hill Trail
+- Geofence of Event Area: Central Park North to 110th Street, from Central Park West to Fifth Avenue
+- Notable Landmarks: Great Hill, Harlem Meer, Conservatory Garden
+- Topographical Data: Gently sloping terrain with elevations ranging from 30 to 50 feet
+
+Weather Data:
+- Forecast: Partly cloudy with a high of 65°F and a low of 50°F
+- Wind: 5 to 10 mph from the southeast
+- Humidity: 60%
+
+Number of Attendees: Expected 5,000
+
+Number of Influencers: 50 social media influencers with a combined reach of 2 million followers
+
+Transcripts: Transcripts of speeches and talks will be available after the event on the official website.
+
+Additional Public Data:
+- Local Transportation: Subway lines A, B, C, D at 59th Street – Columbus Circle; buses M10, M20, M66
+- Nearby Hotels: The Plaza Hotel, JW Marriott Essex House, Park Lane Hotel
+- Emergency Services: Nearest hospital is Mount Sinai Hospital, 1.5 miles from the event location
+
+### Tokenized Template
+
+1. Event Title:
+   [Provide a brief, descriptive title for the event]
+
+2. Event Description:
+   [Provide a detailed, thorough description of the event, including its significance and key aspects]
+
+3. Date and Time:
+   [Specify the exact date and time of the event]
+
+4. Location:
+   [Provide the precise location of the event, including any significant geographical or environmental details]
+
+5. Participants:
+   [List all the participants involved in the event, including their roles and affiliations]
+
+6. Activities:
+   [Describe all the activities that will take place during the event in detail]
+
+7. Communication Methods:
+   - Verbal Communication: [Describe any spoken communication methods used]
+   - Nonverbal Communication: [Describe any gestures, facial expressions, body language, or proxemics involved]
+   - Digital Communication: [Describe any use of digital platforms or devices for communication]
+   - Visual Communication: [Describe any visual aids or elements used for communication]
+
+8. Symbols and Signs:
+   - [Symbol/Sign]: 
+     - Signifier: [The physical form of the sign]
+     - Signified: [The meaning or concept it represents]
+     - Context: [The situation or usage in which it appears]
+
+9. Technologies Involved:
+   [List any technologies or technological systems used during the event, including their purposes]
+
+10. Cultural Context:
+    [Describe the cultural context of the event, including any relevant rituals, customs, traditions, and cultural symbols]
+
+11. Biological Context:
+    [Describe any biological, genetic, or ecological elements relevant to the event, including any interactions with the environment]
+
+12. Legal or Ethical Considerations:
+    [Describe any legal or ethical considerations relevant to the event, including any regulatory signs or legal frameworks involved]
+
+13. Purpose and Goals:
+    [Describe the purpose and goals of the event in detail, including any long-term objectives]
+
+14. Historical Context:
+    [Provide any historical context relevant to the event, including its origins and evolution over time]
+
+15. Visual Elements:
+    [Describe any visual elements used in the event, such as art, color schemes, or visual displays]
+
+16. Auditory Elements:
+    [Describe any auditory elements used in the event, such as music, speeches, or sound effects]
+
+17. Textual Elements:
+    [Provide any text or documents related to the event, such as brochures, agendas, or informational materials]
+
+18. Semiotic Theories:
+    - Structural Semiotics: [Explain any structural semiotic elements involved]
+    - Peircean Semiotics: [Explain any Peircean semiotic elements involved]
+    - Saussurean Semiotics: [Explain any Saussurean semiotic elements involved]
+    - Biosemiotics: [Explain any biosemiotic elements involved]
+    - Cognitive Semiotics: [Explain any cognitive semiotic elements involved]
+    - Cultural Semiotics: [Explain any cultural semiotic elements involved]
+
+19. Subfields of Semiotics:
+    - Semiotic Anthropology: [Describe any anthropological semiotic elements]
+    - Comics Semiotics: [Describe any elements related to the semiotics of comics]
+    - Computational Semiotics: [Describe any computational semiotic elements]
+    - Cultural and Literary Semiotics: [Describe any literary or cultural semiotic elements]
+    - Cybersemiotics: [Describe any cybersemiotic elements]
+    - Design Semiotics: [Describe any design-related semiotic elements]
+    - Ethnosemiotics: [Describe any ethnographic semiotic elements]
+    - Film Semiotics: [Describe any film-related semiotic elements]
+    - Finite Semiotics: [Describe any technological semiotic elements]
+    - Gregorian Chant Semiology: [Describe any semiotic elements related to Gregorian chant]
+    - Hylosemiotics: [Describe any hylosemiotic elements]
+    - Law and Semiotics: [Describe any legal semiotic elements]
+    - Marketing Semiotics: [Describe any marketing-related semiotic elements]
+    - Music Semiotics: [Describe any musical semiotic elements]
+    - Organizational Semiotics: [Describe any organizational semiotic elements]
+    - Pictorial Semiotics: [Describe any pictorial semiotic elements]
+    - Semiotics of Music Videos: [Describe any semiotic elements in music videos]
+    - Social Semiotics: [Describe any social semiotic elements]
+    - Structuralism and Post-Structuralism: [Describe any structuralist or post-structuralist elements]
+    - Theatre Semiotics: [Describe any semiotic elements in theatre]
+    - Urban Semiotics: [Describe any urban semiotic elements]
+    - Visual Semiotics: [Describe any visual semiotic elements]
+    - Semiotics of Photography: [Describe any photographic semiotic elements]
+    - Artificial Intelligence Semiotics: [Describe any AI-related semiotic elements]
+    - Semiotics of Mathematics: [Describe any mathematical semiotic elements]
+
+20. Spatial Data:
+    - Latitude and Longitude: [Specify the coordinates]
+    - Known Public Utilities: [Describe available public utilities in the area]
+    - Roads: [List nearby roads]
+    - Trails: [List any trails in the area]
+    - Geofence of Event Area: [Specify the geofence boundaries]
+    - Notable Landmarks: [List any notable landmarks in the area]
+    - Topographical Data: [Describe the topography of the area]
+
+21. Weather Data:
+    [Provide the weather forecast for the event day]
+
+22. Number of Attendees:
+    [Estimate the number of attendees]
+
+23. Number of Influencers:
+    [Estimate the number of influencers and their combined reach]
+
+24. Transcripts:
+    [Provide any transcripts from the event]
+
+25. Additional Public Data:
+    - Local Transportation: [Describe available local transportation options]
+    - Nearby Hotels: [List nearby hotels]
+    - Emergency Services: [Provide information on nearby emergency services]
+
+26. Additional Notes:
+    [Any other relevant information not covered in the sections above]
+
