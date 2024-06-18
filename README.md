@@ -5,7 +5,7 @@ Sign System Categorization
 
 ## Overview
 
-This project categorizes a given keyword or phrase into various sign systems and subcategories to analyze the influence of each sign system. The project uses both simple string matching and GPT-4 to provide an in-depth analysis and detailed descriptions.
+This project categorizes a given keyword, phrase or pdf into various sign systems and subcategories to analyze the influence of each sign system. The project uses both simple string matching and GPT-4 to provide an in-depth analysis and detailed descriptions.
 
 ## Sign Systems and Subcategories
 
