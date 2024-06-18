@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project categorizes a given keyword, phrase, or PDF into various sign systems and subcategories to analyze the influence of each sign system. Additionally, it deconstructs the input into a signifier chain. The project uses both simple string matching and GPT-4 to provide an in-depth analysis and detailed descriptions.
+This project categorizes a given keyword, phrase, or PDF into various sign systems and subcategories to analyze the influence of each sign system. Additionally, it deconstructs the input into a signifier chain. The project uses both simple string matching and GPT-4 to provide an in-depth analysis and detailed descriptions. Multimodal input is also analyzed within input.pdf if provided. 
 
 ## Sign Systems and Subcategories
 
