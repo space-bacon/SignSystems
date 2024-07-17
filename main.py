@@ -1,12 +1,16 @@
 from openai import OpenAI
-
-client = OpenAI(api_key="your_api_key")
 import os
 import re
 import pdfplumber
 from pdf2image import convert_from_path
 from PIL import Image
 import pytesseract
+import networkx as nx
+import matplotlib.pyplot as plt
+from sympy import FiniteSet
+
+# Set your OpenAI API key
+client = OpenAI(api_key="your_api_key")
 
 # Define the sign systems and their subcategories
 sign_systems = {
@@ -69,42 +73,114 @@ sign_systems = {
     }
 }
 
-def gpt_generate_relational_definition(category, subcategory, keyword):
-    prompt = f"Explain how the concept '{subcategory}' from '{category}' relates to the following input: {keyword}"
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You are an expert in sign systems and semiotics."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=300,
-        temperature=0.7
-    )
-    return response.choices[0].message.content.strip()
+# Definitions corresponding to the directory structure
+definitions = {
+    "DNA": "DNA: The molecule that carries genetic information in all living organisms and many viruses.",
+    "RNA": "RNA: A molecule involved in decoding, regulation, and expression of genes.",
+    "Protein Synthesis": "Protein Synthesis: The process by which cells build proteins, involving transcription and translation.",
+    "Epigenetics": "Epigenetics: The study of heritable changes in gene expression that do not involve changes to the underlying DNA sequence.",
+    "Signal Transduction": "Signal Transduction: The process by which a cell responds to external signals via a series of molecular changes.",
+    "Receptor-Ligand Interactions": "Receptor-Ligand Interactions: The binding of a ligand (such as a hormone or neurotransmitter) to a receptor, initiating a cellular response.",
+    "Intracellular Communication": "Intracellular Communication: The communication processes that occur within a single cell.",
+    "Intercellular Communication": "Intercellular Communication: The communication between different cells through signaling molecules and other mechanisms.",
+    "Symbiosis": "Symbiosis: A close and often long-term interaction between two different biological species.",
+    "Pollination": "Pollination: The transfer of pollen from the male structures to the female structures of plants, enabling fertilization.",
+    "Seed Dispersal": "Seed Dispersal: The movement or transport of seeds away from the parent plant to reduce competition and promote species spread.",
+    "Animal Behavior": "Animal Behavior: The scientific study of everything animals do, including movement, interaction, learning, and social behavior.",
+    "Natural Selection": "Natural Selection: The process by which organisms better adapted to their environment tend to survive and produce more offspring.",
+    "Coevolution": "Coevolution: The process by which two or more species reciprocally affect each other's evolution.",
+    "Speciation": "Speciation: The formation of new and distinct species in the course of evolution.",
+    "Phonology": "Phonology: The study of the sound systems of languages.",
+    "Morphology": "Morphology: The study of the structure and form of words in a language.",
+    "Syntax": "Syntax: The study of the rules that govern the structure of sentences.",
+    "Semantics": "Semantics: The study of meaning in language.",
+    "Pragmatics": "Pragmatics: The study of how context influences the interpretation of meaning in communication.",
+    "Gestures": "Gestures: Movements of the body, especially the hands and arms, used to communicate or emphasize ideas or emotions.",
+    "Facial Expressions": "Facial Expressions: The use of facial movements to convey emotions, intentions, or information.",
+    "Body Language": "Body Language: Nonverbal communication through body movements, postures, and gestures.",
+    "Proxemics": "Proxemics: The study of how people use space in communication, including personal distance and territory.",
+    "Symbols": "Symbols: Objects, figures, sounds, or images that represent abstract ideas or concepts.",
+    "Rituals": "Rituals: Formalized actions or series of actions performed in a prescribed order, often for ceremonial or symbolic purposes.",
+    "Art": "Art: Creative visual, auditory, or performance artifacts that express imaginative, conceptual, or technical skill.",
+    "Myths": "Myths: Traditional stories that embody cultural beliefs and values, often involving gods, ancestors, or heroes.",
+    "Digital Communication": "Digital Communication: The exchange of information through digital devices and platforms.",
+    "Internet of Things": "Internet of Things: The network of physical objects embedded with sensors and connectivity to enable communication and data exchange.",
+    "Artificial Intelligence": "Artificial Intelligence: The simulation of human intelligence in machines designed to think and learn.",
+    "Birds": "Bird Vocalizations: Sounds produced by birds for communication, including songs and calls.",
+    "Mammals": "Mammal Vocalizations: Sounds produced by mammals for communication, including calls, grunts, and roars.",
+    "Amphibians": "Amphibian Vocalizations: Sounds produced by amphibians, particularly frogs and toads, for communication.",
+    "Insects": "Insect Vocalizations: Sounds produced by insects for communication, including stridulation and buzzing.",
+    "Pheromones": "Pheromones: Chemicals released by an organism that affect the behavior or physiology of others of its species.",
+    "Scent Marking": "Scent Marking: The use of scents to mark territory or convey information about an individual's presence or reproductive status.",
+    "Alarm Signals": "Alarm Signals: Chemical or auditory signals produced by animals to warn others of danger.",
+    "Trail Markers": "Trail Markers: Chemicals laid down by insects to create paths that guide others to food sources or nesting sites.",
+    "Coloration": "Coloration: The use of color patterns by animals for communication, camouflage, or warning.",
+    "Bioluminescence": "Bioluminescence: The production and emission of light by living organisms, often used for communication or attracting prey.",
+    "Postures": "Postures: The use of body positions by animals to convey information or intentions.",
+    "Movements": "Movements: Specific actions or sequences of actions performed by animals to communicate, such as mating dances or threat displays.",
+    "Grooming": "Grooming: The use of touch by animals to clean or comfort each other, often serving social bonding functions.",
+    "Touch": "Touch: The use of physical contact by animals to convey information or emotions.",
+    "Vibrations": "Vibrations: The use of substrate-borne vibrations by animals to communicate, such as in spider web signaling or elephant ground communication.",
+    "Mathematical Symbols": "Mathematical Symbols: Symbols used to represent numbers, operations, relations, and other mathematical concepts.",
+    "Programming Languages": "Programming Languages: Formal languages comprising sets of instructions used to produce various kinds of output from a computer.",
+    "Logical Notation": "Logical Notation: A system of symbols used to represent logical expressions and arguments.",
+    "Chemical Formulae": "Chemical Formulae: Representations of chemical substances using symbols for their constituent elements and their ratios.",
+    "Regulatory Signs": "Regulatory Signs: Road signs that provide information about traffic laws and regulations.",
+    "Warning Signs": "Warning Signs: Road signs that alert drivers to potential hazards or changes in road conditions.",
+    "Informational Signs": "Informational Signs: Road signs that provide information about routes, distances, services, and points of interest.",
+    "Guide Signs": "Guide Signs: Road signs that provide directional information to help drivers navigate.",
+    "Flags": "Maritime Flags: Flags used to communicate information between ships and shore or between ships at sea.",
+    "Lights": "Navigation Lights: Lights used on vessels to indicate their position, heading, and status to other vessels.",
+    "Sound Signals": "Sound Signals: Auditory signals, such as horns or bells, used in maritime navigation to communicate information about vessel movements and conditions.",
+    "Buoys": "Buoys: Floating markers used to indicate navigational routes, hazards, and other information in waterways.",
+    "Air Traffic Control": "Air Traffic Control: The system of managing aircraft movements on the ground and in the air to ensure safety and efficiency.",
+    "Navigation Lights": "Aviation Navigation Lights: Lights used on aircraft to indicate position, direction, and status.",
+    "Ground Signals": "Ground Signals: Visual signals used on airport runways and taxiways to guide aircraft movements.",
+    "In-Flight Signals": "In-Flight Signals: Visual and auditory signals used inside the aircraft to communicate with passengers and crew.",
+    "Structural Semiotics": "Structural Semiotics: The study of signs and symbols as elements of communicative systems, emphasizing their structural relationships.",
+    "Peircean Semiotics": "Peircean Semiotics: A theory of signs developed by Charles Sanders Peirce, focusing on the triadic relationship between sign, object, and interpretant.",
+    "Saussurean Semiotics": "Saussurean Semiotics: A theory of signs developed by Ferdinand de Saussure, emphasizing the binary relationship between the signifier and the signified.",
+    "Biosemiotics": "Biosemiotics: The study of communication and sign processes in living organisms.",
+    "Cognitive Semiotics": "Cognitive Semiotics: The interdisciplinary study of meaning-making processes, combining insights from semiotics, cognitive science, and linguistics.",
+    "Cultural Semiotics": "Cultural Semiotics: The study of signs and symbols within cultural contexts, exploring how meaning is constructed and interpreted in cultural practices.",
+    "Semiotic Anthropology": "Semiotic Anthropology: The study of human signs and symbols in social and cultural contexts.",
+    "Comics Semiotics": "Comics Semiotics: The analysis of codes and signs in comics.",
+    "Computational Semiotics": "Computational Semiotics: The application of semiotics in human-computer interaction and AI.",
+    "Cultural and Literary Semiotics": "Cultural and Literary Semiotics: The examination of signs in literature and culture.",
+    "Cybersemiotics": "Cybersemiotics: The integration of cybernetics and semiotics in a common framework.",
+    "Design Semiotics": "Design Semiotics: The use of signs in product and industrial design.",
+    "Ethnosemiotics": "Ethnosemiotics: The link between semiotics and ethnographic methods.",
+    "Film Semiotics": "Film Semiotics: The study of signs and codes in film.",
+    "Finite Semiotics": "Finite Semiotics: The semiotics of technology and its impact on human thought.",
+    "Gregorian Chant Semiology": "Gregorian Chant Semiology: The semiotic analysis of Gregorian chant.",
+    "Hylosemiotics": "Hylosemiotics: The understanding of meaning as inference through physical interaction.",
+    "Law and Semiotics": "Law and Semiotics: The exploration of semiotics in legal contexts.",
+    "Marketing Semiotics": "Marketing Semiotics: The application of semiotics to advertising and brand communication.",
+    "Music Semiotics": "Music Semiotics: The study of signs in music.",
+    "Organizational Semiotics": "Organizational Semiotics: The semiotic processes in organizational contexts.",
+    "Pictorial Semiotics": "Pictorial Semiotics: The analysis of visual signs in art.",
+    "Semiotics of Music Videos": "Semiotics of Music Videos: The semiotic analysis of popular music videos.",
+    "Social Semiotics": "Social Semiotics: The study of cultural codes in social contexts.",
+    "Structuralism and Post-Structuralism": "Structuralism and Post-Structuralism: The semiotic theories of structuralism and post-structuralism.",
+    "Theatre Semiotics": "Theatre Semiotics: The application of semiotics to theatre studies.",
+    "Urban Semiotics": "Urban Semiotics: The study of meaning in urban forms.",
+    "Visual Semiotics": "Visual Semiotics: The analysis of visual signs and their meanings.",
+    "Semiotics of Photography": "Semiotics of Photography: The study of symbolism in photography.",
+    "Artificial Intelligence Semiotics": "Artificial Intelligence Semiotics: The semiotics of AI systems.",
+    "Semiotics of Mathematics": "Semiotics of Mathematics: The study of signs in mathematics."
+}
 
 def gpt_categorization_and_signifier_chain(keyword, images=None):
     prompt = f"Categorize the following keyword or phrase into the relevant sign systems and assign weights to the influence of each sign system in its formation. Additionally, deconstruct the input into a signifier chain. The sign systems are: {list(sign_systems.keys())}. Keyword: {keyword}"
-    if images:
-        prompt += "\nAdditionally, consider the attached images in the categorization process."
 
-    messages = [
-        {"role": "system", "content": "You are an expert in categorizing sign systems and deconstructing signifier chains."},
-        {"role": "user", "content": prompt}
-    ]
-
-    if images:
-        for i, image in enumerate(images):
-            with open(image, "rb") as img_file:
-                messages.append({"role": "user", "content": f"Image {i+1}", "image": img_file.read()})
-
-    response = client.chat.completions.create(
+    response = client.completions.create(
         model="gpt-4",
-        messages=messages,
+        prompt=prompt,
         max_tokens=3000,
         temperature=0.7
     )
 
-    return response.choices[0].message.content.strip()
+    return response.choices[0].text.strip()
 
 def parse_gpt_response(response):
     weights = {}
@@ -176,12 +252,10 @@ def generate_output(keyword, weights, subcategories, summary, signifier_chain):
             output += f"  {subcategory}: {subweight:.2f}%\n"
     output += "\nDetailed Descriptions:\n"
     for category, weight in weights.items():
-        if weight > 0:
-            output += f"\n{category}: {weight:.2f}%\n"
-            for subcategory in sign_systems[category]:
-                if subcategories[category][subcategory] > 0:
-                    relational_definition = gpt_generate_relational_definition(category, subcategory, keyword)
-                    output += f"  {subcategory}: {relational_definition}\n"
+        output += f"\n{category}: {weight:.2f}%\n"
+        for subcategory in sign_systems[category]:
+            for sign in sign_systems[category][subcategory]:
+                output += f"  {sign}: {definitions[sign]}\n"
     output += "\nSummary:\n"
     output += summary
     output += "\n\nSignifier Chain:\n"
@@ -227,9 +301,39 @@ def split_text_into_batches(text, max_tokens_per_batch):
 
     return batches
 
+def visualize_interactions(sign_systems):
+    G = nx.Graph()
+
+    # Add nodes and edges based on interactions
+    for system, subsystems in sign_systems.items():
+        for sub, categories in subsystems.items():
+            for category in categories:
+                G.add_node(category)
+                for other_category in categories:
+                    if category != other_category:
+                        G.add_edge(category, other_category)
+
+    # Draw the graph
+    plt.figure(figsize=(12, 12))
+    nx.draw(G, with_labels=True, node_size=3000, node_color="lightblue", font_size=10, font_weight="bold")
+    plt.title("Sign Systems Interaction Graph")
+    plt.show()
+
+def calculate_intersections(sign_systems):
+    sets = {}
+    for system, subsystems in sign_systems.items():
+        sets[system] = FiniteSet(*[category for sub in subsystems.values() for category in sub])
+
+    # Calculate intersections (example: intersection between Biological and Human sign systems)
+    biological_set = sets["Biological Sign Systems"]
+    human_set = sets["Human Sign Systems"]
+    intersection = biological_set.intersect(human_set)
+
+    print(f"Intersection between Biological and Human Sign Systems: {intersection}")
+
 def main():
     input_file = "input.pdf" if os.path.exists("input.pdf") else "input.txt"
-    image_file = "/mnt/data/IMG_3495.png"
+    image_files = ["/mnt/data/IMG_4656.png", "/mnt/data/IMG_4657.png"]
 
     if input_file.endswith(".pdf"):
         keyword, images = extract_text_and_images_from_pdf(input_file)
@@ -237,9 +341,9 @@ def main():
         with open(input_file, "r") as file:
             keyword = file.read().strip()
         images = None
-    elif image_file.endswith(".png"):
-        keyword = extract_text_from_image(image_file)
-        images = [image_file]
+    elif image_files:
+        keyword = ' '.join([extract_text_from_image(image) for image in image_files])
+        images = image_files
 
     # Split the text into batches if necessary
     max_tokens_per_batch = 3000  # Adjust as needed
@@ -270,6 +374,12 @@ def main():
     output = generate_output(keyword, combined_weights, combined_subcategories, summary, signifier_chain)
     with open("output.txt", "w") as f:
         f.write(output)
+
+    # Visualize interactions
+    visualize_interactions(sign_systems)
+
+    # Calculate and print intersections
+    calculate_intersections(sign_systems)
 
 if __name__ == "__main__":
     main()
